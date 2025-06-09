@@ -29,7 +29,7 @@ export function HeroSection() {
       {/* Main content area (text, accent sparkles, button, interactive spotlight) */}
       <div
         ref={heroContentRef}
-        className="relative z-10 text-center p-4" // z-10 to be above background elements
+        className="relative z-10 text-center p-4"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -46,7 +46,13 @@ export function HeroSection() {
         />
 
         <div className="relative z-[1]"> {/* Content above interactive spotlight */}
-          <div className="relative inline-block">
+          {/* Decorative Gradient Lines */}
+          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-[2px] w-3/4 blur-sm" />
+          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-px w-3/4" />
+          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-[5px] w-1/4 blur-sm" />
+          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-px w-1/4" />
+          
+          <div className="relative inline-block mt-8"> {/* Added mt-8 here */}
             <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-foreground">
               <span className="text-primary">Meet</span>NX
             </h1>
