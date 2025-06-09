@@ -27,9 +27,9 @@ interface SparklesCoreProps {
 }
 
 export const SparklesCore: React.FC<SparklesCoreProps> = ({
-  particleColor = 'hsl(var(--accent))', // Use accent color by default
-  particleDensity = 0.5, // Lower density for a more subtle effect
-  speed = 0.5, // Slower speed
+  particleColor = 'hsl(var(--accent))', 
+  particleDensity = 0.5, 
+  speed = 0.5, 
   minSize = 0.5,
   maxSize = 1.5,
   className,
@@ -54,16 +54,16 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
     canvas.height = height;
 
     const initSparkles = () => {
-      const numParticles = Math.floor(width * height * particleDensity / 1000); // Adjust density factor
+      const numParticles = Math.floor(width * height * particleDensity / 1000); 
       const newSparkles: Sparkle[] = [];
       for (let i = 0; i < numParticles; i++) {
-        const maxLife = Math.random() * 60 + 120; // Longer life for slower fade
+        const maxLife = Math.random() * 60 + 120; 
         newSparkles.push({
           id: Math.random().toString(36).substring(2),
           x: Math.random() * width,
           y: Math.random() * height,
           size: Math.random() * (maxSize - minSize) + minSize,
-          opacity: Math.random() * 0.5 + 0.2, // Start with lower opacity
+          opacity: Math.random() * 0.4 + 0.6, // Increased base opacity: 0.6 to 1.0
           vx: (Math.random() - 0.5) * speed,
           vy: (Math.random() - 0.5) * speed,
           life: maxLife,
@@ -76,41 +76,42 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
     initSparkles();
 
     const animate = () => {
-      ctx.clearRect(0, 0, width, height);
+      if (!ctx || !canvas) return; // Ensure ctx and canvas are still valid
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Use canvas.width/height for clarity
       setSparkles(prevSparkles =>
         prevSparkles.map(s => {
           let newX = s.x + s.vx;
           let newY = s.y + s.vy;
           let newLife = s.life - 1;
-          let newOpacity = (newLife / s.maxLife) * (Math.random() * 0.3 + 0.7); // Fade out based on life, with some randomness
+          let newOpacity = (newLife / s.maxLife) * (Math.random() * 0.3 + 0.7); 
 
-          if (newLife <= 0 || newX < 0 || newX > width || newY < 0 || newY > height) {
-            // Reset particle
+          if (newLife <= 0 || newX < 0 || newX > canvas.width || newY < 0 || newY > canvas.height) {
             const maxLife = Math.random() * 60 + 120;
             return {
               ...s,
-              x: Math.random() * width,
-              y: Math.random() * height,
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
               vx: (Math.random() - 0.5) * speed,
               vy: (Math.random() - 0.5) * speed,
-              opacity: Math.random() * 0.5 + 0.2,
+              opacity: Math.random() * 0.4 + 0.6, // Consistent opacity re-initialization
               life: maxLife,
               maxLife: maxLife,
               size: Math.random() * (maxSize - minSize) + minSize,
             };
           }
           return { ...s, x: newX, y: newY, life: newLife, opacity: newOpacity };
-        }).filter(s => s.life > 0)
+        })
       );
 
       sparkles.forEach(s => {
+        if (!ctx) return;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2, false);
         ctx.fillStyle = particleColor;
         ctx.globalAlpha = s.opacity;
         ctx.fill();
       });
-      ctx.globalAlpha = 1; // Reset globalAlpha
+      ctx.globalAlpha = 1; 
 
       animationFrameId.current = requestAnimationFrame(animate);
     };
@@ -118,14 +119,12 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
     animationFrameId.current = requestAnimationFrame(animate);
 
     const handleResize = () => {
-      if (container) {
+      if (container && canvas && ctx) {
         width = container.offsetWidth;
         height = container.offsetHeight;
-        if(canvas) {
-            canvas.width = width;
-            canvas.height = height;
-        }
-        initSparkles(); // Re-initialize sparkles on resize
+        canvas.width = width;
+        canvas.height = height;
+        initSparkles(); 
       }
     };
     window.addEventListener('resize', handleResize);
@@ -137,7 +136,7 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
       }
       window.removeEventListener('resize', handleResize);
     };
-  }, [particleColor, particleDensity, speed, minSize, maxSize]); // Rerun effect if these props change
+  }, [particleColor, particleDensity, speed, minSize, maxSize]); 
 
   return (
     <div className={cn("relative w-full h-full", containerClassName)} ref={containerRef}>

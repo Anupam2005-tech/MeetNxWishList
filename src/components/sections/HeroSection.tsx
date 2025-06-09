@@ -5,7 +5,7 @@ import { SparklesCore } from "@/components/ui/SparklesCore";
 
 export function HeroSection() {
   return (
-    <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center bg-background bg-grid-pattern overflow-hidden pt-16 sm:pt-20"> {/* Increased min-height slightly */}
+    <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center bg-background bg-grid-pattern overflow-hidden pt-16 sm:pt-20">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="relative z-10 text-center p-4">
         <div className="relative inline-block">
@@ -15,11 +15,11 @@ export function HeroSection() {
           <div className="absolute -bottom-4 sm:-bottom-6 left-1/2 -translate-x-1/2 w-full max-w-xs sm:max-w-md h-10 sm:h-16 pointer-events-none">
             <SparklesCore
               particleColor="hsl(var(--accent))"
-              particleDensity={0.8}
-              minSize={0.6}
-              maxSize={1.2}
+              particleDensity={1.5}         // Increased density
+              minSize={0.8}                 // Increased minSize
+              maxSize={2.2}                 // Increased maxSize
               speed={0.3}
-              containerClassName="opacity-75"
+              containerClassName=""           // Removed opacity-75, relying on internal opacity logic
             />
           </div>
         </div>
@@ -30,8 +30,8 @@ export function HeroSection() {
           <GradientBorderButton 
             href="#waitlist" 
             asChild
-            className="px-10 py-5 text-xl" // Increased padding and text size
-            contentClassName="px-10 py-5 text-xl" // Ensure content also gets larger padding
+            className="px-10 py-5 text-xl" 
+            contentClassName="px-10 py-5 text-xl" 
           >
             Join the Waitlist
           </GradientBorderButton>
