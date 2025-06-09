@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 
 export function AboutSection() {
@@ -18,13 +19,13 @@ export function AboutSection() {
             </p>
           </div>
           <div className="lg:w-1/2 flex justify-center">
-            <Image 
-              src="https://placehold.co/500x400.png" 
-              alt="Team collaborating with MeetNX" 
-              width={500} 
+            <Image
+              src="https://placehold.co/500x400.png"
+              alt="Conceptual diagram of MeetNX features"
+              width={500}
               height={400}
               className="rounded-lg shadow-2xl"
-              data-ai-hint="team collaboration" 
+              data-ai-hint="network features"
             />
           </div>
         </div>
