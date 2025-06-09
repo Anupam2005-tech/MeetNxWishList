@@ -51,7 +51,14 @@ export function HeroSection() {
             <h1 className="font-headline text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tight text-foreground">
               <span className="text-primary">Meet</span>NX
             </h1>
-            {/* Accent Sparkles - positioned under the text */}
+            {/* Decorative Gradient Lines - Placed after H1, before Sparkles */}
+            <div className="flex flex-col items-center space-y-1 mt-2">
+              <div className="bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-[2px] w-3/4 blur-sm" />
+              <div className="bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-px w-3/4" />
+              <div className="bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-[5px] w-1/4 blur-sm" />
+              <div className="bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-px w-1/4" />
+            </div>
+            {/* Accent Sparkles - positioned under the text and gradient lines */}
             <div className="absolute -bottom-8 sm:-bottom-10 left-1/2 -translate-x-1/2 w-full max-w-xs sm:max-w-md h-10 sm:h-16 pointer-events-none">
               <SparklesCore
                 particleColor="#FFFFFF" 
@@ -61,14 +68,6 @@ export function HeroSection() {
                 speed={0.3}
               />
             </div>
-          </div>
-
-          {/* Decorative Gradient Lines */}
-          <div className="flex flex-col items-center space-y-1">
-            <div className="bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-[2px] w-3/4 blur-sm" />
-            <div className="bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-px w-3/4" />
-            <div className="bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-[5px] w-1/4 blur-sm" />
-            <div className="bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-px w-1/4" />
           </div>
           
           <p className="mt-10 sm:mt-12 text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto">
