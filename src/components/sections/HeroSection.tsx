@@ -22,7 +22,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center bg-background bg-grid-pattern overflow-hidden pt-16 sm:pt-20">
+    <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center bg-background bg-grid-pattern overflow-hidden pt-24 sm:pt-28">
       {/* Radial gradient mask for the grid pattern (vignette effect) */}
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
 
@@ -53,7 +53,7 @@ export function HeroSection() {
             {/* Accent Sparkles - positioned under the text */}
             <div className="absolute -bottom-8 sm:-bottom-10 left-1/2 -translate-x-1/2 w-full max-w-xs sm:max-w-md h-10 sm:h-16 pointer-events-none">
               <SparklesCore
-                particleColor="#FFFFFF" // Changed to white
+                particleColor="#FFFFFF" 
                 particleDensity={1.5}
                 minSize={0.8}
                 maxSize={2.2}
