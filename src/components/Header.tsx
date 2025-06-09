@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { GradientBorderButton } from '@/components/ui/GradientBorderButton';
 
 export function Header() {
   return (
@@ -12,13 +12,14 @@ export function Header() {
             <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-accent to-primary rounded-full"></span>
           </span>
         </Link>
-        <Button
+        <GradientBorderButton
           asChild
-          variant="ghost"
-          className="text-foreground text-base border border-transparent hover:border-primary/50 hover:bg-primary/10 hover:text-primary transition-all duration-300 px-4 py-2 rounded-md"
+          href="#waitlist"
+          containerClassName="rounded-md" // Match previous button's rounding
+          contentClassName="px-4 py-2 text-base" // Match previous button's padding and text size
         >
-          <Link href="#waitlist">Contact Us</Link>
-        </Button>
+          Contact Us
+        </GradientBorderButton>
       </div>
     </header>
   );
