@@ -9,7 +9,6 @@ export function Header() {
         <Link href="/" className="text-2xl sm:text-3xl font-bold text-primary hover:text-primary/90 transition-colors">
           <span className="relative inline-block">
             MeetNX
-            <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-accent to-primary rounded-full"></span>
           </span>
         </Link>
         <GradientBorderButton
