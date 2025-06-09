@@ -53,7 +53,7 @@ export function HeroSection() {
             {/* Accent Sparkles - positioned under the text */}
             <div className="absolute -bottom-8 sm:-bottom-10 left-1/2 -translate-x-1/2 w-full max-w-xs sm:max-w-md h-10 sm:h-16 pointer-events-none">
               <SparklesCore
-                particleColor="hsl(var(--accent))" // Accent color for these
+                particleColor="#FFFFFF" // Changed to white
                 particleDensity={1.5}
                 minSize={0.8}
                 maxSize={2.2}
