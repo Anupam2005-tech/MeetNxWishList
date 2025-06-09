@@ -1,5 +1,7 @@
 
-import React from "react";
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
 import { Mic, Sparkles, Share2, FileText, CheckCircle } from "lucide-react";
 
 const features = [
@@ -30,6 +32,69 @@ const features = [
 ];
 
 export function HowItWorksSection() {
+  const timelineContainerRef = useRef<HTMLDivElement>(null);
+  const [beamPosition, setBeamPosition] = useState(0);
+  const [currentContainerHeight, setCurrentContainerHeight] = useState(0);
+  const beamHeight = 100; // Height of the beam element in pixels
+
+  useEffect(() => {
+    const container = timelineContainerRef.current;
+    if (!container) return;
+
+    const updateCurrentContainerHeight = () => {
+      if (container) {
+        setCurrentContainerHeight(container.offsetHeight);
+      }
+    };
+    
+    const handleScroll = () => {
+      if (!container) return;
+
+      const rect = container.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const actualContainerHeight = container.offsetHeight; // Use live height for calculation
+
+      let progress = (viewportHeight - rect.top) / (viewportHeight + actualContainerHeight);
+      progress = Math.max(0, Math.min(1, progress));
+
+      const maxTravel = Math.max(0, actualContainerHeight - beamHeight);
+      setBeamPosition(progress * maxTravel);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          updateCurrentContainerHeight();
+          window.addEventListener('scroll', handleScroll, { passive: true });
+          window.addEventListener('resize', updateCurrentContainerHeight);
+          handleScroll(); 
+        } else {
+          window.removeEventListener('scroll', handleScroll);
+          window.removeEventListener('resize', updateCurrentContainerHeight);
+        }
+      },
+      { threshold: 0.01 } 
+    );
+
+    observer.observe(container);
+    // Initial call to set height in case it's already visible on load
+    if (document.readyState === 'complete') {
+        updateCurrentContainerHeight();
+    } else {
+        window.addEventListener('load', updateCurrentContainerHeight);
+    }
+
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateCurrentContainerHeight);
+      window.removeEventListener('load', updateCurrentContainerHeight);
+      if (container) {
+        observer.unobserve(container);
+      }
+    };
+  }, []);
+
   return (
     <section className="py-16 sm:py-24 bg-section-light-background text-section-light-foreground">
       <div className="container mx-auto px-4">
@@ -40,27 +105,39 @@ export function HowItWorksSection() {
           </p>
         </div>
 
-        <div className="relative">
+        <div className="relative" ref={timelineContainerRef}>
           {/* Central Timeline Line */}
-          <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-1 bg-border/50 rounded-full -translate-x-1/2"></div>
+          <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-1 bg-border/30 rounded-full -translate-x-1/2 z-[1]"></div>
+          
+          {/* Scrolling Beam of Light - For md+ screens */}
+          {currentContainerHeight > 0 && (
+            <div
+              className="hidden md:block absolute left-1/2 -translate-x-1/2 w-2 rounded-full z-[5]"
+              style={{
+                height: `${beamHeight}px`,
+                top: `${beamPosition}px`,
+                backgroundImage: 'linear-gradient(to bottom, hsl(var(--primary)/0), hsl(var(--primary)/0.8), hsl(var(--primary)/0))',
+                boxShadow: '0 0 15px 3px hsl(var(--primary)/0.5)',
+                transition: 'top 0.05s linear',
+              }}
+            />
+          )}
 
           <div className="space-y-12 md:space-y-0">
             {features.map((feature, index) => (
               <div key={index} className="md:grid md:grid-cols-[1fr_auto_1fr] md:gap-x-8 items-start relative">
-                {/* Timeline Dot - visible on all screens, adjusted for mobile */}
-                <div className="md:hidden absolute left-0 top-1 w-px h-full bg-border/30 ml-[calc(1.5rem/2)]"></div> {/* Vertical line for mobile */}
+                <div className="md:hidden absolute left-0 top-1 w-px h-full bg-border/30 ml-[calc(1.5rem/2)]"></div>
                 <div className="absolute left-0 top-1 md:left-1/2 md:-translate-x-1/2 z-10 flex items-center justify-center">
                   <div className="bg-primary rounded-full p-1.5 shadow-md border-2 border-section-light-background">
                     <CheckCircle className="h-5 w-5 text-primary-foreground" />
                   </div>
                 </div>
                 
-                {/* Content Card - alternating sides on md+ screens */}
                 <div className={`
                   ${index % 2 === 0 ? 'md:col-start-1 md:text-right' : 'md:col-start-3 md:text-left'}
                   md:row-start-1 
-                  pl-10 md:pl-0 md:pr-0  // Padding for mobile line, reset for md
-                  relative  // For potential future line connectors if needed for mobile styling
+                  pl-10 md:pl-0 md:pr-0
+                  relative
                 `}>
                   <div className="bg-background/10 backdrop-blur-sm p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-border/20 md:inline-block md:max-w-md w-full">
                     <div className={`flex items-center gap-4 mb-3 ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'} flex-row`}>
@@ -73,12 +150,9 @@ export function HowItWorksSection() {
                   </div>
                 </div>
 
-                {/* Spacer for md screens */}
                 <div className="hidden md:block md:col-start-2"></div>
                 
-                {/* Mobile version: always on one side, below the dot */}
-                 <div className="md:hidden mt-4 ml-3"> {/* Margin for dot and line */}
-                    {/* Content is already structured above to appear here on mobile */}
+                 <div className="md:hidden mt-4 ml-3">
                  </div>
               </div>
             ))}
