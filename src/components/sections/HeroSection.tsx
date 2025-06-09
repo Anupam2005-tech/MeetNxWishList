@@ -46,13 +46,8 @@ export function HeroSection() {
         />
 
         <div className="relative z-[1]"> {/* Content above interactive spotlight */}
-          {/* Decorative Gradient Lines */}
-          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-[2px] w-3/4 blur-sm" />
-          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-px w-3/4" />
-          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-[5px] w-1/4 blur-sm" />
-          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-px w-1/4" />
           
-          <div className="relative inline-block mt-8"> {/* Added mt-8 here */}
+          <div className="relative inline-block mt-8"> 
             <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-foreground">
               <span className="text-primary">Meet</span>NX
             </h1>
@@ -67,6 +62,15 @@ export function HeroSection() {
               />
             </div>
           </div>
+
+          {/* Decorative Gradient Lines - MOVED HERE */}
+          <div className="mt-6 flex flex-col items-center space-y-1">
+            <div className="bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-[2px] w-3/4 blur-sm" />
+            <div className="bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-px w-3/4" />
+            <div className="bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-[5px] w-1/4 blur-sm" />
+            <div className="bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-px w-1/4" />
+          </div>
+          
           <p className="mt-10 sm:mt-12 text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto">
             Revolutionize your conference calls with AI-powered summaries. Never miss a key insight again.
           </p>
