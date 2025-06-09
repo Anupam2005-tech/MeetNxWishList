@@ -1,6 +1,8 @@
+
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
+import { AllInOneSection } from "@/components/sections/AllInOneSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { EarlyAccessSection } from "@/components/sections/EarlyAccessSection";
 import { WaitlistSection } from "@/components/sections/WaitlistSection";
@@ -13,6 +15,7 @@ export default function Home() {
       <Header />
       <HeroSection />
       <HowItWorksSection />
+      <AllInOneSection />
       <AboutSection />
       <EarlyAccessSection />
       <WaitlistSection />
