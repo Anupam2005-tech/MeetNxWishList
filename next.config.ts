@@ -2,7 +2,7 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['three', 'globe.gl'],
+  transpilePackages: ['three', 'globe.gl', 'three-globe'],
   typescript: {
     ignoreBuildErrors: true,
   },
