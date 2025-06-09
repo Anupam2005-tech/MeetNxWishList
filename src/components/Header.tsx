@@ -10,7 +10,7 @@ export function Header() {
           MeetNX
         </Link>
         <Button asChild variant="ghost" className="text-foreground hover:text-primary transition-colors px-4 py-2">
-          <Link href="#contact">Contact Us</Link>
+          <Link href="#waitlist">Contact Us</Link>
         </Button>
       </div>
     </header>
