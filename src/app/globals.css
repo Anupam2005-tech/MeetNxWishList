@@ -68,8 +68,6 @@ body {
   /* The .dark class is not strictly needed if the app is always dark-themed based on :root.
      If a light/dark toggle was a feature, .dark would be defined here with overrides.
      For this project, :root defines the dark theme as default.
-     If ShadCN components internally rely on .dark for their dark mode variants, we might need to add .dark to the html/body tag.
-     Given the prompt, a single, predominantly dark theme is implied.
      The ShadCN components should respect the CSS variables set in :root.
   */
 }
@@ -94,5 +92,13 @@ body {
   @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: .7; }
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
