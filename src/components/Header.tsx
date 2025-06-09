@@ -15,8 +15,9 @@ export function Header() {
         <GradientBorderButton
           asChild
           href="#waitlist"
-          containerClassName="rounded-md" // Match previous button's rounding
-          contentClassName="px-4 py-2 text-base" // Match previous button's padding and text size
+          containerClassName="rounded-md"
+          borderClassName="bg-[conic-gradient(from_90deg_at_50%_50%,hsl(var(--foreground)/0.1)_0%,hsl(var(--foreground)/0.5)_50%,hsl(var(--foreground)/0.1)_100%)]"
+          contentClassName="px-4 py-2 text-base"
         >
           Contact Us
         </GradientBorderButton>
