@@ -7,6 +7,7 @@ import { WaitlistSection } from "@/components/sections/WaitlistSection";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
+  const currentYear = new Date().getFullYear();
   return (
     <main className="flex flex-col min-h-screen">
       <Header />
@@ -15,7 +16,7 @@ export default function Home() {
       <AboutSection />
       <EarlyAccessSection />
       <WaitlistSection />
-      <Footer />
+      <Footer currentYear={currentYear} />
     </main>
   );
 }
