@@ -48,7 +48,7 @@ export function HeroSection() {
         <div className="relative z-[1]"> {/* Content above interactive spotlight */}
           
           <div className="relative inline-block mt-8"> 
-            <h1 className="font-headline text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-foreground">
+            <h1 className="font-headline text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tight text-foreground">
               <span className="text-primary">Meet</span>NX
             </h1>
             {/* Accent Sparkles - positioned under the text */}
@@ -64,7 +64,7 @@ export function HeroSection() {
           </div>
 
           {/* Decorative Gradient Lines */}
-          <div className="mt-2 flex flex-col items-center space-y-1">
+          <div className="flex flex-col items-center space-y-1">
             <div className="bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-[2px] w-3/4 blur-sm" />
             <div className="bg-gradient-to-r from-transparent via-[#6366F1] to-transparent h-px w-3/4" />
             <div className="bg-gradient-to-r from-transparent via-[#0EA5E9] to-transparent h-[5px] w-1/4 blur-sm" />
