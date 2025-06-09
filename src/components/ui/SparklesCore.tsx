@@ -35,10 +35,29 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
   className,
   containerClassName,
 }) => {
-  const [sparkles, setSparkles] = useState<Sparkle[]>([]);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameId = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const sparklesRef = useRef<Sparkle[]>([]);
+  // We use a state just to trigger re-render on initial load / resize if necessary,
+  // but the animation loop will use sparklesRef for performance.
+  const [, setLastUpdate] = useState(0);
+
+
+  const createSparkle = (canvasWidth: number, canvasHeight: number): Sparkle => {
+    const maxLife = Math.random() * 60 + 120; // Approx 2-3 seconds at 60fps
+    return {
+      id: Math.random().toString(36).substring(2),
+      x: Math.random() * canvasWidth,
+      y: Math.random() * canvasHeight,
+      size: Math.random() * (maxSize - minSize) + minSize,
+      opacity: Math.random() * 0.4 + 0.6, // Start with good opacity
+      vx: (Math.random() - 0.5) * speed,
+      vy: (Math.random() - 0.5) * speed,
+      life: maxLife,
+      maxLife: maxLife,
+    };
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -54,69 +73,55 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
     canvas.height = height;
 
     const initSparkles = () => {
-      const numParticles = Math.floor(width * height * particleDensity / 1000); 
+      const numParticles = Math.floor(width * height * particleDensity / 1000);
       const newSparkles: Sparkle[] = [];
       for (let i = 0; i < numParticles; i++) {
-        const maxLife = Math.random() * 60 + 120; 
-        newSparkles.push({
-          id: Math.random().toString(36).substring(2),
-          x: Math.random() * width,
-          y: Math.random() * height,
-          size: Math.random() * (maxSize - minSize) + minSize,
-          opacity: Math.random() * 0.4 + 0.6, // Increased base opacity: 0.6 to 1.0
-          vx: (Math.random() - 0.5) * speed,
-          vy: (Math.random() - 0.5) * speed,
-          life: maxLife,
-          maxLife: maxLife,
-        });
+        newSparkles.push(createSparkle(width, height));
       }
-      setSparkles(newSparkles);
+      sparklesRef.current = newSparkles;
+      setLastUpdate(Date.now()); // Trigger a re-render
     };
 
     initSparkles();
 
     const animate = () => {
-      if (!ctx || !canvas) return; // Ensure ctx and canvas are still valid
-      ctx.clearRect(0, 0, canvas.width, canvas.height); // Use canvas.width/height for clarity
-      setSparkles(prevSparkles =>
-        prevSparkles.map(s => {
-          let newX = s.x + s.vx;
-          let newY = s.y + s.vy;
-          let newLife = s.life - 1;
-          let newOpacity = (newLife / s.maxLife) * (Math.random() * 0.3 + 0.7); 
+      if (!ctx || !canvas) { // Check canvas and ctx validity each frame
+        if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+        return;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-          if (newLife <= 0 || newX < 0 || newX > canvas.width || newY < 0 || newY > canvas.height) {
-            const maxLife = Math.random() * 60 + 120;
-            return {
-              ...s,
-              x: Math.random() * canvas.width,
-              y: Math.random() * canvas.height,
-              vx: (Math.random() - 0.5) * speed,
-              vy: (Math.random() - 0.5) * speed,
-              opacity: Math.random() * 0.4 + 0.6, // Consistent opacity re-initialization
-              life: maxLife,
-              maxLife: maxLife,
-              size: Math.random() * (maxSize - minSize) + minSize,
-            };
-          }
-          return { ...s, x: newX, y: newY, life: newLife, opacity: newOpacity };
-        })
-      );
+      sparklesRef.current = sparklesRef.current.map(s => {
+        let newX = s.x + s.vx;
+        let newY = s.y + s.vy;
+        let newLife = s.life - 1;
+        // Fade out based on life, but ensure it's somewhat random for twinkling
+        let newOpacity = (newLife / s.maxLife) * (Math.random() * 0.3 + 0.7); 
 
-      sparkles.forEach(s => {
-        if (!ctx) return;
+        if (newLife <= 0 || newX < 0 || newX > canvas.width || newY < 0 || newY > canvas.height) {
+          return createSparkle(canvas.width, canvas.height); // Re-initialize
+        }
+        return { ...s, x: newX, y: newY, life: newLife, opacity: Math.max(0, newOpacity) };
+      });
+
+      sparklesRef.current.forEach(s => {
+        if (!ctx) return; // Double check context
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2, false);
         ctx.fillStyle = particleColor;
         ctx.globalAlpha = s.opacity;
         ctx.fill();
       });
-      ctx.globalAlpha = 1; 
+      ctx.globalAlpha = 1; // Reset global alpha
 
       animationFrameId.current = requestAnimationFrame(animate);
     };
 
-    animationFrameId.current = requestAnimationFrame(animate);
+    // Ensure animation starts only if canvas and context are valid
+    if (ctx && canvas) {
+        animationFrameId.current = requestAnimationFrame(animate);
+    }
+    
 
     const handleResize = () => {
       if (container && canvas && ctx) {
@@ -124,11 +129,10 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
         height = container.offsetHeight;
         canvas.width = width;
         canvas.height = height;
-        initSparkles(); 
+        initSparkles(); // Re-initialize sparkles for new dimensions
       }
     };
     window.addEventListener('resize', handleResize);
-
 
     return () => {
       if (animationFrameId.current) {
@@ -136,7 +140,7 @@ export const SparklesCore: React.FC<SparklesCoreProps> = ({
       }
       window.removeEventListener('resize', handleResize);
     };
-  }, [particleColor, particleDensity, speed, minSize, maxSize]); 
+  }, [particleColor, particleDensity, speed, minSize, maxSize]); // Dependencies for re-initializing effect
 
   return (
     <div className={cn("relative w-full h-full", containerClassName)} ref={containerRef}>

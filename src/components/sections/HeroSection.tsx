@@ -13,7 +13,6 @@ export function HeroSection() {
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (heroContentRef.current) {
-      // clientX/Y are viewport-relative. We need them relative to the heroContentRef.
       const rect = heroContentRef.current.getBoundingClientRect();
       setMousePosition({ 
         x: event.clientX - rect.left, 
@@ -37,13 +36,12 @@ export function HeroSection() {
           className="pointer-events-none absolute inset-0 transition-opacity duration-300"
           style={{
             background: isHovering 
-              ? `radial-gradient(circle 400px at ${mousePosition.x}px ${mousePosition.y}px, hsl(var(--primary) / 0.15), transparent 80%)` 
+              ? `radial-gradient(circle 400px at ${mousePosition.x}px ${mousePosition.y}px, hsl(var(--primary) / 0.20), transparent 80%)` 
               : 'none',
             opacity: isHovering ? 1 : 0,
           }}
         />
 
-        {/* Wrap content to ensure it's above the spotlight effect */}
         <div className="relative z-[1]">
           <div className="relative inline-block">
             <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">
