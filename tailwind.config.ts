@@ -48,6 +48,8 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
+        'section-light-background': 'hsl(var(--section-light-background))',
+        'section-light-foreground': 'hsl(var(--section-light-foreground))',
         chart: {
           '1': 'hsl(var(--chart-1))',
           '2': 'hsl(var(--chart-2))',
