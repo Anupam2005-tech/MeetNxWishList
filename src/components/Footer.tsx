@@ -19,7 +19,7 @@ export function Footer({ currentYear }: FooterProps) {
       />
       <div className="container mx-auto px-4 text-center relative z-10">
         <p className="text-sm">
-          &copy; {currentYear} MeetNX. All rights reserved.
+          &copy; {currentYear} MeetNX by Anupam. All rights reserved.
         </p>
         <p className="text-sm mt-1">
           Transforming meetings with AI.

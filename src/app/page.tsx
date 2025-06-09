@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { AllInOneSection } from "@/components/sections/AllInOneSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { OriginSection } from "@/components/sections/OriginSection";
 import { EarlyAccessSection } from "@/components/sections/EarlyAccessSection";
 import { WaitlistSection } from "@/components/sections/WaitlistSection";
 import { Footer } from "@/components/Footer";
@@ -17,6 +18,7 @@ export default function Home() {
       <HowItWorksSection />
       <AllInOneSection />
       <AboutSection />
+      <OriginSection />
       <EarlyAccessSection />
       <WaitlistSection />
       <Footer currentYear={currentYear} />
