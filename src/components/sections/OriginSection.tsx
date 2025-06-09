@@ -1,6 +1,6 @@
 
 "use client";
-import { CustomGlobe } from '@/components/ui/CustomGlobe';
+import Image from 'next/image';
 import { motion } from "framer-motion";
 
 export function OriginSection() {
@@ -25,9 +25,16 @@ export function OriginSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px]"
+            className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] flex items-center justify-center"
           >
-            <CustomGlobe />
+            <Image
+              src="https://placehold.co/600x400.png"
+              alt="Globe pointing to Tripura, India"
+              width={600}
+              height={400}
+              className="rounded-lg shadow-2xl object-contain"
+              data-ai-hint="globe india"
+            />
           </motion.div>
         </div>
       </div>
