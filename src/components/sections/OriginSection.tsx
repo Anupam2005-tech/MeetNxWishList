@@ -28,9 +28,7 @@ export function OriginSection() {
         </motion.div>
 
         {/* Foreground Globe (on all screens, replaces the background one on small) */}
-        <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl aspect-square rounded-full overflow-hidden mx-auto z-10">
-          <DottedGlobe />
-        </div>
+    
       </div>
     </section>
   );
