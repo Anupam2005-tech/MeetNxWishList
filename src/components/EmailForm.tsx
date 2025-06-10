@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
@@ -29,7 +30,7 @@ function SubmitButton() {
       type="submit" 
       aria-disabled={pending} 
       disabled={pending}
-      className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto animate-pulse-once"
+      className="bg-accent text-accent-foreground hover:bg-accent/90 w-full sm:w-auto animate-pulse-once px-5 py-3 text-base lg:px-6 lg:py-4 lg:text-lg"
     >
       {pending ? "Submitting..." : "Join Waitlist"}
     </Button>
@@ -68,16 +69,16 @@ export function EmailForm() {
   return (
     <form
       action={formAction}
-      className="flex flex-col sm:flex-row gap-4 w-full max-w-md"
+      className="flex flex-col sm:flex-row gap-4 w-full max-w-md lg:max-w-lg"
       onSubmit={form.handleSubmit(() => formAction(new FormData(form.control._formValuesRef.current)))}
     >
       <div className="relative flex-grow">
-        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 text-muted-foreground" />
         <Input
           {...form.register("email")}
           type="email"
           placeholder="Enter your email address"
-          className="pl-10 pr-4 py-3 text-base h-auto"
+          className="pl-10 pr-4 py-3 text-base lg:pl-12 lg:py-4 lg:text-lg h-auto"
           aria-invalid={!!form.formState.errors.email || !!(state?.type === 'error' && state.message.toLowerCase().includes('email'))}
           aria-describedby="email-error"
         />
@@ -92,3 +93,4 @@ export function EmailForm() {
     </form>
   );
 }
+

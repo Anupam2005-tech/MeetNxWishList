@@ -55,14 +55,18 @@ export function EarlyAccessSection() {
         }}
       />
       <div className="container mx-auto px-4 text-center relative z-10"> {/* Ensure content is above the gradient */}
-        <h2 className="font-headline text-3xl sm:text-4xl font-bold tracking-tight mb-6 text-primary">
+        <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-primary">
           Join Our Waitlist Now!
         </h2>
-        <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+        <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto">
           Be the first to experience the future of productivity!
         </p>
         <div className="flex justify-center">
-          <GradientBorderButton href="#waitlist" asChild>
+          <GradientBorderButton 
+            href="#waitlist" 
+            asChild
+            contentClassName="px-6 py-3 text-lg lg:px-8 lg:py-4 lg:text-xl"
+          >
             Get Early Access
           </GradientBorderButton>
         </div>
@@ -70,3 +74,4 @@ export function EarlyAccessSection() {
     </section>
   );
 }
+

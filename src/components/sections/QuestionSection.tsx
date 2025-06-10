@@ -29,7 +29,7 @@ function SubmitButton() {
       type="submit" 
       aria-disabled={pending} 
       disabled={pending}
-      className="bg-accent text-accent-foreground hover:bg-accent/90 w-full py-3 text-base sm:text-lg"
+      className="bg-accent text-accent-foreground hover:bg-accent/90 w-full py-3 text-base sm:text-lg lg:py-4 lg:text-xl"
     >
       {pending ? "Sending..." : "Send Question"}
     </Button>
@@ -87,31 +87,31 @@ export function QuestionSection() {
   return (
     <section id="ask-question" className="py-16 sm:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4">
-        <div className="max-w-xl mx-auto text-center mb-10 sm:mb-12">
-          <h2 className="font-headline text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-primary">
+        <div className="max-w-xl lg:max-w-2xl mx-auto text-center mb-10 sm:mb-12">
+          <h2 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-primary">
             Do you have any questions?
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
             We're here to help! Fill out the form below and we'll get back to you as soon as possible.
           </p>
         </div>
         <form
           action={formAction} // Server action for progressive enhancement
           onSubmit={onFormSubmit} // Client-side handling with react-hook-form
-          className="space-y-6 max-w-xl mx-auto"
+          className="space-y-6 max-w-xl lg:max-w-2xl mx-auto"
         >
           <div>
-            <label htmlFor="email-question" className="block text-sm font-medium text-foreground mb-1">
+            <label htmlFor="email-question" className="block text-sm font-medium text-foreground mb-1 lg:text-base">
               Your Email
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 text-muted-foreground" />
               <Input
                 id="email-question"
                 {...form.register("email")}
                 type="email"
                 placeholder="you@example.com"
-                className="pl-10 pr-4 py-3 text-base h-auto"
+                className="pl-10 pr-4 py-3 text-base lg:pl-12 lg:py-4 lg:text-lg h-auto"
                 aria-invalid={!!form.formState.errors.email}
                 aria-describedby="email-question-error"
               />
@@ -122,16 +122,16 @@ export function QuestionSection() {
           </div>
 
           <div>
-            <label htmlFor="question" className="block text-sm font-medium text-foreground mb-1">
+            <label htmlFor="question" className="block text-sm font-medium text-foreground mb-1 lg:text-base">
               Your Question
             </label>
             <div className="relative">
-               <HelpCircle className="absolute left-3 top-3.5 h-5 w-5 text-muted-foreground" />
+               <HelpCircle className="absolute left-3 top-3.5 lg:top-4.5 h-5 w-5 lg:h-6 lg:w-6 text-muted-foreground" />
               <Textarea
                 id="question"
                 {...form.register("question")}
                 placeholder="Ask us anything..."
-                className="pl-10 pr-4 py-3 text-base min-h-[100px] sm:min-h-[120px]"
+                className="pl-10 pr-4 py-3 text-base lg:pl-12 lg:py-4 lg:text-lg min-h-[100px] sm:min-h-[120px] lg:min-h-[140px]"
                 aria-invalid={!!form.formState.errors.question}
                 aria-describedby="question-error"
               />
@@ -147,3 +147,4 @@ export function QuestionSection() {
     </section>
   );
 }
+

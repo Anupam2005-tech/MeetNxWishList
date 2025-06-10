@@ -77,14 +77,14 @@ export function HeroSection() {
             </div>
           </div>
           
-          <p className="mt-10 sm:mt-12 text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-10 sm:mt-12 text-xl sm:text-2xl lg:text-3xl text-muted-foreground max-w-2xl mx-auto">
             Revolutionize your conference calls with AI-powered summaries. Never miss a key insight again.
           </p>
           <div className="mt-12 sm:mt-16">
             <GradientBorderButton
               href="#waitlist"
               asChild
-              contentClassName="px-6 sm:px-10 py-3 sm:py-5 text-lg sm:text-xl"
+              contentClassName="px-6 sm:px-10 py-3 sm:py-5 text-lg sm:text-xl lg:px-12 lg:py-6 lg:text-2xl"
             >
               Join the Waitlist
             </GradientBorderButton>
@@ -94,3 +94,4 @@ export function HeroSection() {
     </section>
   );
 }
+
