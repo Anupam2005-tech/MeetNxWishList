@@ -14,7 +14,7 @@ export function Footer({ currentYear }: FooterProps) {
           backgroundImage: wavyBackgroundSVG,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'top center',
-          backgroundSize: '100% 80px', // Stretch width, fixed height for waves to match div height
+          backgroundSize: '100% 80px', 
         }}
       />
       <div className="container mx-auto px-4 text-center relative z-10">

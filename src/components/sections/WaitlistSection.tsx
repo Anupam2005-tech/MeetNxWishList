@@ -9,7 +9,7 @@ export function WaitlistSection() {
           Be the First to Experience MeetNX
         </h2>
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-10 max-w-xl mx-auto">
-          Sign up for our waitlist and get exclusive early access, updates, and special offers.
+          Sign up for my waitlist and get exclusive early access, updates, and special offers from me, Anupam.
         </p>
         <div className="flex justify-center">
           <EmailForm />
@@ -18,4 +18,3 @@ export function WaitlistSection() {
     </section>
   );
 }
-

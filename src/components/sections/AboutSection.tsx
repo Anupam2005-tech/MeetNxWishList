@@ -7,15 +7,15 @@ export function AboutSection() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-col items-center gap-8 lg:gap-12">
           <div className="lg:w-full lg:text-center">
-            <h2 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 lg:mb-8 text-primary">About MeetNX</h2>
+            <h2 className="font-headline text-primary text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 lg:mb-8">About MeetNX</h2>
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-4 lg:mb-6 max-w-3xl mx-auto">
-              MeetNX is born from the idea that meetings should be productive, not a black hole for time and information. We're leveraging the power of artificial intelligence to transform how teams capture and utilize knowledge from their conference calls.
+              MeetNX is born from the idea that meetings should be productive, not a black hole for time and information. I'm leveraging the power of artificial intelligence to transform how teams capture and utilize knowledge from their conference calls.
             </p>
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-4 lg:mb-6 max-w-3xl mx-auto">
-              Our mission is to empower individuals and organizations to make the most out of every conversation. By providing clear, concise, and actionable summaries, MeetNX helps you save time, improve collaboration, and drive better outcomes.
+              My mission is to empower individuals and organizations to make the most out of every conversation. By providing clear, concise, and actionable summaries, MeetNX helps you save time, improve collaboration, and drive better outcomes.
             </p>
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Join us on our journey to redefine meeting productivity.
+              Join me on my journey to redefine meeting productivity.
             </p>
           </div>
           <div className="lg:w-full flex justify-center mt-8 lg:mt-0">

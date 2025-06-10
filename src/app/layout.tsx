@@ -1,10 +1,11 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: 'MeetNX Waitlist',
-  description: 'Join the waitlist for MeetNX - AI Summaries for Your Conference Calls',
+  description: 'Join the waitlist for MeetNX, a project by Anupam - AI Summaries for Your Conference Calls',
 };
 
 export default function RootLayout({

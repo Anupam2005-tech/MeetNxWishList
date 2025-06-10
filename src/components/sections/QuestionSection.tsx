@@ -5,7 +5,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import type { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -62,7 +62,6 @@ export function QuestionSection() {
           description: state.message,
           variant: "destructive",
         });
-        // Set form errors if they come from the server action
         if (state.errors) {
             if (state.errors.email) {
                  form.setError("email", { type: "server", message: state.errors.email[0] });
@@ -76,7 +75,6 @@ export function QuestionSection() {
   }, [state, toast, form]);
 
   const onFormSubmit = form.handleSubmit(() => {
-    // Create FormData object from react-hook-form values
     const formData = new FormData();
     const values = form.getValues();
     formData.append('email', values.email);
@@ -92,12 +90,12 @@ export function QuestionSection() {
             Do you have any questions?
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-muted-foreground">
-            We're here to help! Fill out the form below and we'll get back to you as soon as possible.
+            I'm here to help! Fill out the form below and I'll get back to you as soon as possible.
           </p>
         </div>
         <form
-          action={formAction} // Server action for progressive enhancement
-          onSubmit={onFormSubmit} // Client-side handling with react-hook-form
+          action={formAction} 
+          onSubmit={onFormSubmit} 
           className="space-y-6 max-w-xl lg:max-w-2xl mx-auto"
         >
           <div>
@@ -105,13 +103,13 @@ export function QuestionSection() {
               Your Email
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 text-muted-foreground" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground lg:h-6 lg:w-6" />
               <Input
                 id="email-question"
                 {...form.register("email")}
                 type="email"
                 placeholder="you@example.com"
-                className="pl-10 pr-4 py-3 text-base lg:pl-12 lg:py-4 lg:text-lg h-auto"
+                className="pl-10 pr-4 py-3 text-base h-auto lg:pl-12 lg:py-4 lg:text-lg"
                 aria-invalid={!!form.formState.errors.email}
                 aria-describedby="email-question-error"
               />
@@ -126,12 +124,12 @@ export function QuestionSection() {
               Your Question
             </label>
             <div className="relative">
-               <HelpCircle className="absolute left-3 top-3.5 lg:top-4.5 h-5 w-5 lg:h-6 lg:w-6 text-muted-foreground" />
+               <HelpCircle className="absolute left-3 top-3.5 text-muted-foreground lg:top-4.5 h-5 w-5 lg:h-6 lg:w-6" />
               <Textarea
                 id="question"
                 {...form.register("question")}
                 placeholder="Ask us anything..."
-                className="pl-10 pr-4 py-3 text-base lg:pl-12 lg:py-4 lg:text-lg min-h-[100px] sm:min-h-[120px] lg:min-h-[140px]"
+                className="pl-10 pr-4 py-3 text-base min-h-[100px] sm:min-h-[120px] lg:min-h-[140px] lg:pl-12 lg:py-4 lg:text-lg"
                 aria-invalid={!!form.formState.errors.question}
                 aria-describedby="question-error"
               />
@@ -147,4 +145,3 @@ export function QuestionSection() {
     </section>
   );
 }
-

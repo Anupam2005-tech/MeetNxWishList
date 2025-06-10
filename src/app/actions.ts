@@ -32,7 +32,7 @@ export async function submitEmail(prevState: any, formData: FormData) {
     console.log(`Email saved to waitlist_emails.txt: ${email}`);
     return {
       type: "success",
-      message: "Thank you, Anupam! You've been added to the waitlist.",
+      message: "Thank you! You've been added to the waitlist for MeetNX by Anupam.",
     };
   } catch (error) {
     console.error("Failed to save email to file:", error);
@@ -74,7 +74,7 @@ export async function submitQuestion(prevState: any, formData: FormData) {
     
     return {
       type: "success",
-      message: "Thank you, Anupam! Your question has been submitted.",
+      message: "Thank you! Anupam has received your question and will get back to you.",
     };
   } catch (error) {
     console.error("Failed to save question to file:", error);
@@ -84,4 +84,3 @@ export async function submitQuestion(prevState: any, formData: FormData) {
     };
   }
 }
-

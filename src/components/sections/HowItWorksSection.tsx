@@ -7,25 +7,25 @@ import { TracingBeam } from '@/components/ui/TracingBeam';
 
 const features = [
   {
-    icon: <Mic className="h-8 w-8 lg:h-10 lg:w-10 text-primary" />,
+    icon: <Mic className="h-8 w-8 text-primary lg:h-10 lg:w-10" />,
     title: "Seamless Recording",
     description: "Easily record your conference calls directly within MeetNX. No extra setup needed.",
     dataAiHint: "microphone audio"
   },
   {
-    icon: <Sparkles className="h-8 w-8 lg:h-10 lg:w-10 text-primary" />,
+    icon: <Sparkles className="h-8 w-8 text-primary lg:h-10 lg:w-10" />,
     title: "Instant AI Summaries",
-    description: "Our advanced AI generates concise and accurate summaries of your meetings in moments.",
+    description: "My advanced AI generates concise and accurate summaries of your meetings in moments.",
     dataAiHint: "artificial intelligence"
   },
   {
-    icon: <FileText className="h-8 w-8 lg:h-10 lg:w-10 text-primary" />,
+    icon: <FileText className="h-8 w-8 text-primary lg:h-10 lg:w-10" />,
     title: "Actionable Insights",
     description: "Extract key decisions, action items, and important topics automatically.",
     dataAiHint: "document report"
   },
   {
-    icon: <Share2 className="h-8 w-8 lg:h-10 lg:w-10 text-primary" />,
+    icon: <Share2 className="h-8 w-8 text-primary lg:h-10 lg:w-10" />,
     title: "Share with Ease",
     description: "Quickly share summaries and insights with your team to keep everyone aligned.",
     dataAiHint: "collaboration network"
@@ -39,7 +39,7 @@ export function HowItWorksSection() {
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">How MeetNX Works</h2>
           <p className="mt-4 text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-xl mx-auto">
-            Experience the future of meetings with our simple, powerful platform.
+            Experience the future of meetings with my simple, powerful platform.
           </p>
         </div>
 
@@ -68,4 +68,3 @@ export function HowItWorksSection() {
     </section>
   );
 }
-
