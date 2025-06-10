@@ -1,7 +1,7 @@
 
 "use client";
 import { motion } from "framer-motion";
-import { InteractiveGlobe } from '@/components/ui/InteractiveGlobe';
+import Image from 'next/image';
 
 export function OriginSection() {
   return (
@@ -23,10 +23,17 @@ export function OriginSection() {
           </motion.div>
           <div className="lg:w-1/2 flex justify-center">
             <div 
-              className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full shadow-2xl overflow-hidden bg-background/50 backdrop-blur-sm border border-border/30"
-              aria-label="Interactive globe showing Earth with India highlighted"
+              className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full shadow-2xl overflow-hidden bg-background/50 backdrop-blur-sm border border-border/30 flex items-center justify-center"
+              aria-label="Placeholder image for global connection"
             >
-              <InteractiveGlobe />
+              <Image
+                src="https://placehold.co/500x500.png"
+                alt="Global Connection Placeholder"
+                width={500}
+                height={500}
+                className="object-cover rounded-full"
+                data-ai-hint="globe world"
+              />
             </div>
           </div>
         </div>
