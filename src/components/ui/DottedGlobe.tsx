@@ -39,17 +39,13 @@ const DottedGlobe: React.FC = () => {
 
   <script>
     // Wrapped in a function to ensure DOM is ready and scripts are loaded.
-    // It's good practice, though basic scripts at end of body often work.
     (function() {
       const indiaCoords = { lat: 22.5, lng: 79.0 };
       const tooltip = document.getElementById('tooltip');
       const globeContainer = document.getElementById('globeViz');
 
-      // Check if essential elements and libraries are available
       if (!globeContainer || !tooltip || !window.THREE || !window.Globe || !window.topojson) {
         console.error("Globe dependencies or HTML elements not found.");
-        // Fallback or error message for user could be added here
-        // For example: globeContainer.innerHTML = "Error loading globe.";
         return;
       }
       
@@ -71,7 +67,7 @@ const DottedGlobe: React.FC = () => {
         .showAtmosphere(true)
         .atmosphereColor("#87CEEB")
         .atmosphereAltitude(0.1)
-        .pointOfView({ lat: 23.8354, lng: 91.2794, altitude: 3.5 }) // Tripura focus
+        .pointOfView({ lat: 23.8354, lng: 91.2794, altitude: 3.5 }) 
         .pointsData([])
         .pointAltitude(0.01)
         .pointColor(() => '#ffffff')
@@ -79,6 +75,7 @@ const DottedGlobe: React.FC = () => {
 
       world.controls().autoRotate = true;
       world.controls().autoRotateSpeed = 3.5;
+      world.controls().enableZoom = false; // Disabled zoom functionality
 
       // Lights
       const ambientLight = new window.THREE.AmbientLight("#00FFFF");
@@ -105,7 +102,6 @@ const DottedGlobe: React.FC = () => {
         animationFrameId = requestAnimationFrame(animateTooltip);
       }
       
-      // World data
       fetch('https://unpkg.com/world-atlas@2.0.2/countries-110m.json')
         .then(res => res.json())
         .then(worldData => {
@@ -114,7 +110,7 @@ const DottedGlobe: React.FC = () => {
           world
             .polygonsData(countries)
             .polygonStrokeColor(() => 'rgba(255,255,255,0.7)')
-            .polygonCapColor(p => p.id === '356' ? 'white' : 'rgba(0,0,0,0)') // '356' is India's ISO numeric code
+            .polygonCapColor(p => p.id === '356' ? 'white' : 'rgba(0,0,0,0)') 
             .polygonSideColor(() => 'rgba(0,0,0,0)');
 
           const landDots = countries.flatMap(country => {
@@ -143,29 +139,15 @@ const DottedGlobe: React.FC = () => {
           world.pointsData(landDots);
 
           setTimeout(() => {
-            animateTooltip(); // Start the animation loop
+            animateTooltip(); 
           }, 1000); 
         })
         .catch(error => console.error('Error loading world data:', error));
 
       const resizeHandler = () => {
-        // The globe.gl instance usually handles resizing of its canvas automatically
-        // when its container resizes. The main concern for the tooltip
-        // is its position relative to the new screen coordinates.
         updateTooltipPosition(); 
       };
       window.addEventListener('resize', resizeHandler);
-
-      // Cleanup function for when the iframe content is removed or reloaded
-      // This is a bit conceptual for srcDoc, as it reloads.
-      // If this were a React component managing its own lifecycle more directly, this would be in useEffect cleanup.
-      // window.addEventListener('beforeunload', () => {
-      //   if (animationFrameId) cancelAnimationFrame(animationFrameId);
-      //   window.removeEventListener('resize', resizeHandler);
-      //   if (world && typeof world.dispose === 'function') {
-      //      world.dispose(); // Hypothetical dispose method
-      //   }
-      // });
     })();
   <\/script>
 </body>
@@ -180,11 +162,10 @@ const DottedGlobe: React.FC = () => {
         width: '100%',
         height: '100%',
         border: 'none',
-        display: 'block', // Ensures iframe takes up block space correctly
-        borderRadius: 'inherit', // Inherit border radius from parent
+        display: 'block', 
+        borderRadius: 'inherit', 
       }}
-      sandbox="allow-scripts allow-same-origin" // allow-scripts is necessary for the globe to function
-                                               // allow-same-origin for fetch if it was to a relative path (not the case here)
+      sandbox="allow-scripts allow-same-origin" 
     />
   );
 };
