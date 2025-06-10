@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -16,7 +17,6 @@ const DottedGlobe: React.FC = () => {
     #tooltip {
       position: absolute;
       color: white;
-      background: rgba(0, 0, 0, 0.7);
       padding: 6px 10px;
       border-radius: 5px;
       pointer-events: none;
@@ -75,7 +75,7 @@ const DottedGlobe: React.FC = () => {
 
       world.controls().autoRotate = true;
       world.controls().autoRotateSpeed = 3.5;
-      world.controls().enableZoom = false; // Disabled zoom functionality
+      world.controls().enableZoom = true; // Enabled zoom functionality
 
       // Lights
       const ambientLight = new window.THREE.AmbientLight("#00FFFF");
