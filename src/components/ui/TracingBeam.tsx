@@ -44,14 +44,14 @@ export const TracingBeam = ({
   }, []);
 
   const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 0.8], [50, svgHeight]),
+    useTransform(scrollYProgress, [0, 0.8], [0, svgHeight]), // Changed 50 to 0
     {
       stiffness: 500,
       damping: 90,
     }
   );
   const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [50, svgHeight - 200]),
+    useTransform(scrollYProgress, [0, 1], [0, svgHeight]), // Changed 50 to 0 and svgHeight - 200 to svgHeight
     {
       stiffness: 500,
       damping: 90,
@@ -73,7 +73,7 @@ export const TracingBeam = ({
             boxShadow:
               scrollYProgress.get() > 0
                 ? "none"
-                : "rgba(var(--primary-rgb), 0.24) 0px 0px 0px 8px", // Using a placeholder, replace var(--primary-rgb)
+                : "hsl(var(--primary) / 0.24) 0px 0px 0px 8px", // Corrected placeholder color
           }}
           className="ml-[27px] h-4 w-4 rounded-full border border-primary shadow-sm flex items-center justify-center"
         >
@@ -137,3 +137,4 @@ export const TracingBeam = ({
     </motion.div>
   );
 };
+
