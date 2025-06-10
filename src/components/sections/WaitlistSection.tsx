@@ -7,7 +7,7 @@ export function WaitlistSection() {
         <h2 className="font-headline text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-primary">
           Be the First to Experience MeetNX
         </h2>
-        <p className="text-xl text-muted-foreground mb-10 max-w-xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-xl mx-auto">
           Sign up for our waitlist and get exclusive early access, updates, and special offers.
         </p>
         <div className="flex justify-center">

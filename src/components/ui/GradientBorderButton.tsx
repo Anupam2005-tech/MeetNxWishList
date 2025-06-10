@@ -41,7 +41,7 @@ export function GradientBorderButton({
       />
       <span
         className={cn(
-          "relative inline-flex h-full w-full cursor-pointer items-center justify-center rounded-[calc(var(--radius)-1px)] bg-background px-8 py-4 text-lg font-medium text-foreground transition-all duration-200 group-hover:bg-background/90",
+          "relative inline-flex h-full w-full cursor-pointer items-center justify-center rounded-[calc(var(--radius)-1px)] bg-background px-6 py-3 text-base font-medium text-foreground transition-all duration-200 group-hover:bg-background/90",
           // Note: rounded-[calc(var(--radius)-1px)] ensures the inner part fits snugly inside the p-0.5 border with rounded-lg
           // For default radius 0.5rem (8px), this becomes rounded-[7px]
           className, 

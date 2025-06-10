@@ -29,7 +29,7 @@ function SubmitButton() {
       type="submit" 
       aria-disabled={pending} 
       disabled={pending}
-      className="bg-accent text-accent-foreground hover:bg-accent/90 w-full"
+      className="bg-accent text-accent-foreground hover:bg-accent/90 w-full py-3 text-base sm:text-lg"
     >
       {pending ? "Sending..." : "Send Question"}
     </Button>
@@ -87,11 +87,11 @@ export function QuestionSection() {
   return (
     <section id="ask-question" className="py-16 sm:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4">
-        <div className="max-w-xl mx-auto text-center mb-10">
+        <div className="max-w-xl mx-auto text-center mb-10 sm:mb-12">
           <h2 className="font-headline text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-primary">
             Do you have any questions?
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base sm:text-lg text-muted-foreground">
             We're here to help! Fill out the form below and we'll get back to you as soon as possible.
           </p>
         </div>
@@ -131,7 +131,7 @@ export function QuestionSection() {
                 id="question"
                 {...form.register("question")}
                 placeholder="Ask us anything..."
-                className="pl-10 pr-4 py-3 text-base min-h-[120px]"
+                className="pl-10 pr-4 py-3 text-base min-h-[100px] sm:min-h-[120px]"
                 aria-invalid={!!form.formState.errors.question}
                 aria-describedby="question-error"
               />

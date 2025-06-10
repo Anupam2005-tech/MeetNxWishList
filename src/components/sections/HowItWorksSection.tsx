@@ -36,9 +36,9 @@ export function HowItWorksSection() {
   return (
     <section className="py-16 sm:py-24 bg-section-light-background text-section-light-foreground">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <h2 className="font-headline text-4xl sm:text-5xl font-bold tracking-tight">How MeetNX Works</h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto">
             Experience the future of meetings with our simple, powerful platform.
           </p>
         </div>

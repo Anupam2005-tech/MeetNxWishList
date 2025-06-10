@@ -84,8 +84,7 @@ export function HeroSection() {
             <GradientBorderButton
               href="#waitlist"
               asChild
-              className="px-10 py-5 text-xl" 
-              contentClassName="px-10 py-5 text-xl"
+              contentClassName="px-6 sm:px-10 py-3 sm:py-5 text-lg sm:text-xl"
             >
               Join the Waitlist
             </GradientBorderButton>
