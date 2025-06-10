@@ -20,7 +20,7 @@ export function AboutSection() {
           </div>
           <div className="lg:w-1/2 flex justify-center">
             <Image
-              src="https://placehold.co/500x400.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMX1Bwmb4pA5iSNO66MvcVLpp3MmCF5_WEVnbpuPOP8nxlFba4AbsOOGt_&s=10"
               alt="Team collaborating with laptops and devices on a wooden table"
               width={500}
               height={400}
