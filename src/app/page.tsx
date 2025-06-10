@@ -7,6 +7,7 @@ import { AboutSection } from "@/components/sections/AboutSection";
 import { OriginSection } from "@/components/sections/OriginSection";
 import { EarlyAccessSection } from "@/components/sections/EarlyAccessSection";
 import { WaitlistSection } from "@/components/sections/WaitlistSection";
+import { QuestionSection } from "@/components/sections/QuestionSection";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <OriginSection />
       <EarlyAccessSection />
       <WaitlistSection />
+      <QuestionSection />
       <Footer currentYear={currentYear} />
     </main>
   );
