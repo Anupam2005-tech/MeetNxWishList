@@ -3,10 +3,15 @@
 
 import { z } from "zod";
 import { QuestionFormSchema } from "@/lib/schemas";
+import fs from 'fs/promises';
+import path from 'path';
 
 const emailSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
 });
+
+const waitlistFilePath = path.join(process.cwd(), 'waitlist_emails.txt');
+const questionsFilePath = path.join(process.cwd(), 'user_questions.txt');
 
 export async function submitEmail(prevState: any, formData: FormData) {
   const validatedFields = emailSchema.safeParse({
@@ -23,20 +28,17 @@ export async function submitEmail(prevState: any, formData: FormData) {
   const email = validatedFields.data.email;
 
   try {
-    // Simulate saving the email
-    console.log(`Email submitted to waitlist: ${email}`);
-    // In a real application, you would save this to a database or a mailing list service.
-    // e.g., await db.waitlist.create({ data: { email } });
-
+    await fs.appendFile(waitlistFilePath, `${email}\n`);
+    console.log(`Email saved to waitlist_emails.txt: ${email}`);
     return {
       type: "success",
-      message: "Thank you! You've been added to the waitlist.",
+      message: "Thank you, Anupam! You've been added to the waitlist.",
     };
   } catch (error) {
-    console.error("Failed to submit email:", error);
+    console.error("Failed to save email to file:", error);
     return {
       type: "error",
-      message: "Something went wrong. Please try again later.",
+      message: "Something went wrong while saving your email. Please try again later.",
     };
   }
 }
@@ -66,19 +68,20 @@ export async function submitQuestion(prevState: any, formData: FormData) {
   const { email, question } = validatedFields.data;
 
   try {
-    // Simulate processing the question
-    console.log(`Question received from ${email}: ${question}`);
-    // In a real application, you might send this as an email, save to a DB, etc.
-
+    const questionEntry = `Email: ${email}\nQuestion: ${question}\n--------------------\n\n`;
+    await fs.appendFile(questionsFilePath, questionEntry);
+    console.log(`Question saved to user_questions.txt from ${email}`);
+    
     return {
       type: "success",
-      message: "Thank you! Your question has been submitted.",
+      message: "Thank you, Anupam! Your question has been submitted.",
     };
   } catch (error) {
-    console.error("Failed to submit question:", error);
+    console.error("Failed to save question to file:", error);
     return {
       type: "error",
-      message: "Something went wrong. Please try again later.",
+      message: "Something went wrong while saving your question. Please try again later.",
     };
   }
 }
+
