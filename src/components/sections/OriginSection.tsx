@@ -1,3 +1,4 @@
+
 "use client";
 import { motion } from "framer-motion";
 import DottedGlobe from '@/components/ui/DottedGlobe'; 
@@ -22,7 +23,7 @@ export function OriginSection() {
           </motion.div>
           <div className="lg:w-1/2 flex justify-center">
             <div 
-              className="w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[650px] md:h-[650px] lg:w-[800px] lg:h-[800px] rounded-full shadow-2xl overflow-hidden bg-background/50 backdrop-blur-sm border border-border/30 flex items-center justify-center"
+              className="w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[650px] md:h-[650px] lg:w-[800px] lg:h-[800px] rounded-full overflow-hidden"
               aria-label="Interactive Dotted Globe showing India"
             >
               <DottedGlobe />
@@ -33,3 +34,4 @@ export function OriginSection() {
     </section>
   );
 }
+
