@@ -1,4 +1,6 @@
+
 "use client";
+
 import React from 'react';
 
 const DottedGlobe: React.FC = () => {
@@ -10,21 +12,8 @@ const DottedGlobe: React.FC = () => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dotted Country Border Globe</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100%;
-      width: 100%;
-      background: #0b1c2c;
-    }
-    #globeViz {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-    }
+    body { margin: 0; overflow: hidden; background: #0b1c2c; display: flex; justify-content: center; align-items: center; }
+    #globeViz { width: 100%; height: 100%; position: relative; } /* Adjusted to fill iframe */
     #tooltip {
       position: absolute;
       color: white;
@@ -49,6 +38,7 @@ const DottedGlobe: React.FC = () => {
   <script src="https://unpkg.com/topojson-client@3"><\/script>
 
   <script>
+    // Wrapped in a function to ensure DOM is ready and scripts are loaded.
     (function() {
       const indiaCoords = { lat: 22.5, lng: 79.0 };
       const tooltip = document.getElementById('tooltip');
@@ -58,11 +48,14 @@ const DottedGlobe: React.FC = () => {
         console.error("Globe dependencies or HTML elements not found.");
         return;
       }
-
+      
       const canvas = document.createElement('canvas');
       canvas.width = canvas.height = 256;
       const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+      if (!ctx) {
+        console.error("Could not get 2D context for globe texture");
+        return;
+      }
       ctx.fillStyle = "#0b1c2c";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       const globeTextureUrl = canvas.toDataURL();
@@ -74,16 +67,17 @@ const DottedGlobe: React.FC = () => {
         .showAtmosphere(true)
         .atmosphereColor("#87CEEB")
         .atmosphereAltitude(0.1)
-        .pointOfView({ lat: 23.8354, lng: 91.2794, altitude: 3.5 })
+        .pointOfView({ lat: 23.8354, lng: 91.2794, altitude: 3.5 }) 
         .pointsData([])
         .pointAltitude(0.01)
         .pointColor(() => '#ffffff')
-        .pointRadius(1);
+        .pointRadius(0.017);
 
       world.controls().autoRotate = true;
-      world.controls().autoRotateSpeed = 4;
-      world.controls().enableZoom = true;
+      world.controls().autoRotateSpeed = 3.5;
+      world.controls().enableZoom = true; // Enabled zoom functionality
 
+      // Lights
       const ambientLight = new window.THREE.AmbientLight("#00FFFF");
       const dirLight1 = new window.THREE.DirectionalLight("#FFD700");
       dirLight1.position.set(-1, 0, 1);
@@ -93,6 +87,7 @@ const DottedGlobe: React.FC = () => {
       pointLight.position.set(2, 2, 2);
       world.scene().add(ambientLight, dirLight1, dirLight2, pointLight);
 
+      // Tooltip updater
       let animationFrameId;
       function updateTooltipPosition() {
         const coords = world.getScreenCoords(indiaCoords.lat, indiaCoords.lng);
@@ -106,7 +101,7 @@ const DottedGlobe: React.FC = () => {
         updateTooltipPosition();
         animationFrameId = requestAnimationFrame(animateTooltip);
       }
-
+      
       fetch('https://unpkg.com/world-atlas@2.0.2/countries-110m.json')
         .then(res => res.json())
         .then(worldData => {
@@ -115,7 +110,7 @@ const DottedGlobe: React.FC = () => {
           world
             .polygonsData(countries)
             .polygonStrokeColor(() => 'rgba(255,255,255,0.7)')
-            .polygonCapColor(p => p.id === '356' ? 'white' : 'rgba(0,0,0,0)')
+            .polygonCapColor(p => p.id === '356' ? 'white' : 'rgba(0,0,0,0)') 
             .polygonSideColor(() => 'rgba(0,0,0,0)');
 
           const landDots = countries.flatMap(country => {
@@ -124,6 +119,13 @@ const DottedGlobe: React.FC = () => {
             const bbox = country.bbox;
             if (!bbox || bbox.length !== 4) return [];
             const [minLng, minLat, maxLng, maxLat] = bbox;
+
+            if (typeof minLng !== 'number' || typeof minLat !== 'number' || 
+                typeof maxLng !== 'number' || typeof maxLat !== 'number' ||
+                minLng > maxLng || minLat > maxLat) {
+              return [];
+            }
+
             for (let i = 0; i < count; i++) {
               const lat = Math.random() * (maxLat - minLat) + minLat;
               const lng = Math.random() * (maxLng - minLng) + minLng;
@@ -135,11 +137,17 @@ const DottedGlobe: React.FC = () => {
           });
 
           world.pointsData(landDots);
-          setTimeout(() => animateTooltip(), 1000);
+
+          setTimeout(() => {
+            animateTooltip(); 
+          }, 1000); 
         })
         .catch(error => console.error('Error loading world data:', error));
 
-      window.addEventListener('resize', updateTooltipPosition);
+      const resizeHandler = () => {
+        updateTooltipPosition(); 
+      };
+      window.addEventListener('resize', resizeHandler);
     })();
   <\/script>
 </body>
@@ -149,16 +157,15 @@ const DottedGlobe: React.FC = () => {
   return (
     <iframe
       srcDoc={htmlContent}
+      title="Dotted Country Border Globe"
       style={{
         width: '100%',
         height: '100%',
         border: 'none',
-        display: 'block',
-        position: 'absolute',
-        top: 0,
-        left: 0,
+        display: 'block', 
+        borderRadius: 'inherit', 
       }}
-      sandbox="allow-scripts allow-same-origin"
+      sandbox="allow-scripts allow-same-origin" 
     />
   );
 };
