@@ -52,7 +52,7 @@ export function HowItWorksSection() {
 
       const rect = container.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-      const actualContainerHeight = container.offsetHeight; // Use live height for calculation
+      const actualContainerHeight = container.offsetHeight; 
 
       let progress = (viewportHeight - rect.top) / (viewportHeight + actualContainerHeight);
       progress = Math.max(0, Math.min(1, progress));
@@ -76,14 +76,16 @@ export function HowItWorksSection() {
       { threshold: 0.01 } 
     );
 
-    observer.observe(container);
-    // Initial call to set height in case it's already visible on load
+    // Ensure container exists before observing
+    if (container) {
+      observer.observe(container);
+    }
+    
     if (document.readyState === 'complete') {
         updateCurrentContainerHeight();
     } else {
         window.addEventListener('load', updateCurrentContainerHeight);
     }
-
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -93,7 +95,7 @@ export function HowItWorksSection() {
         observer.unobserve(container);
       }
     };
-  }, []);
+  }, []); // Empty dependency array ensures this runs once on mount
 
   return (
     <section className="py-16 sm:py-24 bg-section-light-background text-section-light-foreground">
@@ -112,12 +114,12 @@ export function HowItWorksSection() {
           {/* Scrolling Beam of Light - For md+ screens */}
           {currentContainerHeight > 0 && (
             <div
-              className="hidden md:block absolute left-1/2 -translate-x-1/2 w-2 rounded-full z-[5]"
+              className="hidden md:block absolute left-1/2 -translate-x-1/2 w-2.5 rounded-full z-[5]" // Increased width to w-2.5
               style={{
                 height: `${beamHeight}px`,
                 top: `${beamPosition}px`,
-                backgroundImage: 'linear-gradient(to bottom, hsl(var(--primary)/0), hsl(var(--primary)/0.8), hsl(var(--primary)/0))',
-                boxShadow: '0 0 15px 3px hsl(var(--primary)/0.5)',
+                backgroundImage: 'linear-gradient(to bottom, hsl(var(--primary)/0.1), hsl(var(--primary)/1), hsl(var(--primary)/0.1))', // Increased opacity
+                boxShadow: '0 0 20px 5px hsl(var(--primary)/0.7)', // Increased shadow intensity
                 transition: 'top 0.05s linear',
               }}
             />
