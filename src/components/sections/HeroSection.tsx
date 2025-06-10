@@ -5,31 +5,19 @@ import Link from "next/link";
 import { GradientBorderButton } from "@/components/ui/GradientBorderButton";
 import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useState, useRef } from 'react';
-import { motion } from "framer-motion"; // Ensure motion is imported
+import { motion } from "framer-motion";
 
 export function HeroSection() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // For general hero spotlight
-  const [isHoveringHero, setIsHoveringHero] = useState(false); // For general hero spotlight
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); 
+  const [isHoveringHero, setIsHoveringHero] = useState(false); 
   const heroContentRef = useRef<HTMLDivElement>(null);
 
-  const textWrapperRef = useRef<HTMLDivElement>(null); // For text-specific spotlight
-  const [textSpotlightPos, setTextSpotlightPos] = useState({ x: 0, y: 0 });
-  const [isHoveringTextWrapper, setIsHoveringTextWrapper] = useState(false);
+  const textWrapperRef = useRef<HTMLDivElement>(null); 
 
   const handleHeroMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (heroContentRef.current) {
       const rect = heroContentRef.current.getBoundingClientRect();
       setMousePosition({
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top
-      });
-    }
-  };
-
-  const handleTextWrapperMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (textWrapperRef.current) {
-      const rect = textWrapperRef.current.getBoundingClientRect();
-      setTextSpotlightPos({
         x: event.clientX - rect.left,
         y: event.clientY - rect.top
       });
@@ -65,19 +53,14 @@ export function HeroSection() {
           {/* Wrapper for "MeetNX" text and its specific spotlight */}
           <div
             ref={textWrapperRef}
-            className="relative inline-block mt-8 overflow-hidden rounded-lg group" // Added overflow-hidden
-            onMouseMove={handleTextWrapperMouseMove}
-            onMouseEnter={() => setIsHoveringTextWrapper(true)}
-            onMouseLeave={() => setIsHoveringTextWrapper(false)}
+            className="relative inline-block mt-8 overflow-hidden rounded-lg group"
           >
-            {/* Spotlight for "MeetNX" text */}
+            {/* Spotlight for "MeetNX" text - Always visible and from top-center */}
             <motion.div
-              className="pointer-events-none absolute -inset-px transition-opacity duration-300"
+              className="pointer-events-none absolute -inset-px"
               style={{
-                opacity: isHoveringTextWrapper ? 1 : 0,
-                background: isHoveringTextWrapper
-                  ? `radial-gradient(circle 250px at ${textSpotlightPos.x}px ${textSpotlightPos.y}px, hsl(var(--accent) / 0.2), transparent 75%)`
-                  : 'none',
+                opacity: 1, 
+                background: `radial-gradient(circle 250px at 50% 0%, hsl(var(--accent) / 0.2), transparent 75%)`,
               }}
             />
             
