@@ -44,16 +44,16 @@ export const TracingBeam = ({
   }, []);
 
   const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 0.8], [0, svgHeight]), // Changed 50 to 0
+    useTransform(scrollYProgress, [0, 0.8], [0, svgHeight]),
     {
-      stiffness: 500,
+      stiffness: 800, // Increased stiffness for faster reaction
       damping: 90,
     }
   );
   const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, svgHeight]), // Changed 50 to 0 and svgHeight - 200 to svgHeight
+    useTransform(scrollYProgress, [0, 1], [0, svgHeight]),
     {
-      stiffness: 500,
+      stiffness: 800, // Increased stiffness for faster reaction
       damping: 90,
     }
   );
@@ -73,7 +73,7 @@ export const TracingBeam = ({
             boxShadow:
               scrollYProgress.get() > 0
                 ? "none"
-                : "hsl(var(--primary) / 0.24) 0px 0px 0px 8px", // Corrected placeholder color
+                : "hsl(var(--primary) / 0.24) 0px 0px 0px 8px",
           }}
           className="ml-[27px] h-4 w-4 rounded-full border border-primary shadow-sm flex items-center justify-center"
         >
@@ -101,7 +101,7 @@ export const TracingBeam = ({
             d={`M 1 0V -36 l 18 -21 V ${svgHeight * 0.8} l -18 21V ${svgHeight}`}
             fill="none"
             stroke="hsl(var(--primary))" 
-            strokeOpacity="0.2" // Fainter, static path
+            strokeOpacity="0.2"
             transition={{
               duration: 10,
             }}
@@ -110,7 +110,7 @@ export const TracingBeam = ({
             d={`M 1 0V -36 l 18 -21 V ${svgHeight * 0.8} l -18 21V ${svgHeight}`}
             fill="none"
             stroke="url(#gradient)"
-            strokeWidth="2.5" // Thicker, animated path
+            strokeWidth="2.5"
             className="motion-reduce:hidden"
             transition={{
               duration: 10,
@@ -137,4 +137,3 @@ export const TracingBeam = ({
     </motion.div>
   );
 };
-
