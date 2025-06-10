@@ -1,13 +1,13 @@
 
-import { LayoutGrid, Users, Zap } from "lucide-react";
+import { LayoutGrid, Users, Zap, UploadCloud } from "lucide-react";
 import React from "react";
 
 const benefits = [
   {
-    icon: <LayoutGrid className="h-10 w-10 text-primary" />,
-    title: "Unified Workspace",
+    icon: <UploadCloud className="h-10 w-10 text-primary" />,
+    title: "Seamless File Sharing",
     description:
-      "Consolidate your tools in one place. With MeetNX, seamlessly integrate emails, tasks, notes, calendars, contacts, and files, reducing the need for constant context switching.",
+      "Easily upload and share images, documents, and other files directly within your conversations, keeping everyone on the same page without switching apps.",
   },
   {
     icon: <Users className="h-10 w-10 text-primary" />,
