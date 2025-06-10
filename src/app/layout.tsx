@@ -3,11 +3,12 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
+
 export const metadata: Metadata = {
   title: 'MeetNX Waitlist',
   description: 'Join the waitlist for MeetNX, a project by Anupam - AI Summaries for Your Conference Calls',
   icons: {
-    icon: '/favicon.png', // Points to public/favicon.png
+    icon: '/logo.png', 
   },
 };
 
