@@ -2,13 +2,6 @@
 
 MeetNxWishList is a project designed to help users keep track of their wishes, goals, or items they want to acquire, experience, or achieve. With a simple and intuitive interface, users can create, manage, and share their personalized wish lists.
 
-## Features
-
-- Add, edit, and remove wishes from your list
-- Organize wishes by categories or priorities
-- Mark wishes as completed
-- Option to make lists public or private
-- Share your wish list with friends or family
 - Mobile-friendly responsive design
 
 ## Getting Started
