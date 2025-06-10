@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'MeetNX Waitlist',
   description: 'Join the waitlist for MeetNX, a project by Anupam - AI Summaries for Your Conference Calls',
   icons: {
-    icon: '/logo.png', 
+    icon: '/favicon.ico', 
   },
 };
 
