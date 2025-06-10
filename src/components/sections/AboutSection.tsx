@@ -20,7 +20,7 @@ export function AboutSection() {
           </div>
           <div className="lg:w-1/2 flex justify-center">
             <Image
-              src="https://firebasestorage.googleapis.com/v0/b/firebase-console-preview.appspot.com/o/images%2Fvision_pro_test_230919_04_02_26_837_0.jpg?alt=media&token=487cc899-7815-4632-a92c-6238b9759dcb"
+              src="https://placehold.co/500x400.png"
               alt="Team collaborating with laptops and devices on a wooden table"
               width={500}
               height={400}
@@ -33,4 +33,3 @@ export function AboutSection() {
     </section>
   );
 }
-
