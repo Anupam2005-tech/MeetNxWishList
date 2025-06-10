@@ -12,8 +12,6 @@ export function HeroSection() {
   const [isHoveringHero, setIsHoveringHero] = useState(false); 
   const heroContentRef = useRef<HTMLDivElement>(null);
 
-  const textWrapperRef = useRef<HTMLDivElement>(null); 
-
   const handleHeroMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (heroContentRef.current) {
       const rect = heroContentRef.current.getBoundingClientRect();
@@ -50,23 +48,13 @@ export function HeroSection() {
 
         <div className="relative z-[1]"> {/* Content above general spotlight */}
           
-          {/* Wrapper for "MeetNX" text and its specific spotlight */}
+          {/* Wrapper for "MeetNX" text */}
           <div
-            ref={textWrapperRef}
             className="relative inline-block mt-8 overflow-hidden rounded-lg group"
           >
-            {/* Spotlight for "MeetNX" text - Always visible and from top-center */}
-            <motion.div
-              className="pointer-events-none absolute -inset-px"
-              style={{
-                opacity: 1, 
-                background: `radial-gradient(circle 250px at 50% 0%, hsl(var(--accent) / 0.2), transparent 75%)`,
-              }}
-            />
-            
-            {/* Actual content: H1, lines, sparkles, ensured to be above text spotlight */}
+            {/* Actual content: H1, lines, sparkles */}
             <div className="relative z-[2]"> 
-              <h1 className="font-headline text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tight text-foreground">
+              <h1 className="font-headline text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-tight text-foreground select-none">
                 <span className="text-primary">Meet</span>NX
               </h1>
               {/* Decorative Gradient Lines */}
