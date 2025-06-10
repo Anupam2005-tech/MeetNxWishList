@@ -1,7 +1,6 @@
-
 "use client";
 import { motion } from "framer-motion";
-import Image from 'next/image';
+import DottedGlobe from '@/components/ui/DottedGlobe'; // Import the new globe component
 
 export function OriginSection() {
   return (
@@ -24,16 +23,9 @@ export function OriginSection() {
           <div className="lg:w-1/2 flex justify-center">
             <div 
               className="w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full shadow-2xl overflow-hidden bg-background/50 backdrop-blur-sm border border-border/30 flex items-center justify-center"
-              aria-label="Placeholder image for global connection"
+              aria-label="Interactive Dotted Globe showing India"
             >
-              <Image
-                src="https://placehold.co/500x500.png"
-                alt="Global Connection Placeholder"
-                width={500}
-                height={500}
-                className="object-cover rounded-full"
-                data-ai-hint="globe world"
-              />
+              <DottedGlobe />
             </div>
           </div>
         </div>
