@@ -2,7 +2,7 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['three', 'globe.gl', 'three-globe'],
+  transpilePackages: [],
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -18,14 +18,6 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
-  },
-  webpack: (config, options) => {
-    config.module.rules.push({
-      test: /\.mjs$/,
-      include: /node_modules/,
-      type: 'javascript/auto', 
-    });
-    return config;
   },
 };
 
