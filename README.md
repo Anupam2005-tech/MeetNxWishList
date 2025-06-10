@@ -11,41 +11,19 @@ MeetNxWishList is a project designed to help users keep track of their wishes, g
 - [Node.js](https://nodejs.org/) (version 14 or later recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-### Installation
+![Screenshot from 2025-06-10 21-04-49](https://github.com/user-attachments/assets/55afa874-b44b-4676-bcfd-2a30b1fe6971)
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Anupam2005-tech/MeetNxWishList.git
-   cd MeetNxWishList
-   ```
+![Screenshot from 2025-06-10 21-10-32](https://github.com/user-attachments/assets/e7679dc7-0f7b-445c-befd-19f42f930212)
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+![Screenshot from 2025-06-10 21-10-21](https://github.com/user-attachments/assets/a3654e33-84f8-4736-bdbe-04b7e0463b9c)
 
-3. **Start the development server:**
-   ```bash
-   npm start
-   # or
-   yarn start
-   ```
+![Screenshot from 2025-06-10 21-05-55](https://github.com/user-attachments/assets/969e720d-c701-4975-bb96-768cfb3f1ffb)
 
-4. **Open your browser and navigate to:**
-   ```
-   http://localhost:3000
-   ```
+![Screenshot from 2025-06-10 21-06-04](https://github.com/user-attachments/assets/657f584f-3ac4-4904-8b9e-093a939a5546)
 
-## Usage
+![Screenshot from 2025-06-10 21-06-10](https://github.com/user-attachments/assets/e2e3aa57-9c53-45e2-9107-b1d4bb3893ef)
 
-- Create a new wish list or add items to your existing list.
-- Organize and prioritize your wishes.
-- Mark items as completed once you've achieved them.
-- Share your list by generating a shareable link.
-
-## Contributing
+[Screencast from 2025-06-10 21-06-19.webm](https://github.com/user-attachments/assets/97fce6bc-684b-4920-a097-4dd37bd0973e)
 
 Contributions are welcome! Please follow these steps:
 
