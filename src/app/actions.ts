@@ -3,15 +3,13 @@
 
 import { z } from "zod";
 import { QuestionFormSchema } from "@/lib/schemas";
-import fs from 'fs/promises';
-import path from 'path';
+import dbConnect from "@/lib/dbConnect";
+import EmailModel from "@/lib/models/EmailModel";
+import QuestionModel from "@/lib/models/QuestionModel";
 
 const emailSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
 });
-
-const waitlistFilePath = path.join(process.cwd(), 'waitlist_emails.txt');
-const questionsFilePath = path.join(process.cwd(), 'user_questions.txt');
 
 export async function submitEmail(prevState: any, formData: FormData) {
   const validatedFields = emailSchema.safeParse({
@@ -28,14 +26,29 @@ export async function submitEmail(prevState: any, formData: FormData) {
   const email = validatedFields.data.email;
 
   try {
-    await fs.appendFile(waitlistFilePath, `${email}\n`);
-    console.log(`Email saved to waitlist_emails.txt: ${email}`);
+    await dbConnect();
+    const existingEmail = await EmailModel.findOne({ email: email });
+    if (existingEmail) {
+      return {
+        type: "error",
+        message: "This email is already on the waitlist.",
+      };
+    }
+    await EmailModel.create({ email: email });
+    console.log(`Email saved to database: ${email}`);
     return {
       type: "success",
       message: "Thank you! You've been added to the waitlist for MeetNX by Anupam.",
     };
-  } catch (error) {
-    console.error("Failed to save email to file:", error);
+  } catch (error: any) {
+    console.error("Failed to save email to database:", error);
+    // Check for unique constraint violation (code 11000)
+    if (error.code === 11000) {
+        return {
+            type: "error",
+            message: "This email is already on the waitlist.",
+        };
+    }
     return {
       type: "error",
       message: "Something went wrong while saving your email. Please try again later.",
@@ -68,16 +81,17 @@ export async function submitQuestion(prevState: any, formData: FormData) {
   const { email, question } = validatedFields.data;
 
   try {
-    const questionEntry = `Email: ${email}\nQuestion: ${question}\n--------------------\n\n`;
-    await fs.appendFile(questionsFilePath, questionEntry);
-    console.log(`Question saved to user_questions.txt from ${email}`);
+    await dbConnect();
+    await QuestionModel.create({ email, question });
+    console.log(`Question saved to database from ${email}`);
     
     return {
       type: "success",
       message: "Thank you! Anupam has received your question and will get back to you.",
     };
-  } catch (error) {
-    console.error("Failed to save question to file:", error);
+  } catch (error)
+ {
+    console.error("Failed to save question to database:", error);
     return {
       type: "error",
       message: "Something went wrong while saving your question. Please try again later.",
