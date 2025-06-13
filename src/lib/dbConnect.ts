@@ -1,4 +1,5 @@
 
+import 'dotenv/config'; // Explicitly load .env variables
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -22,6 +23,7 @@ if (!cached) {
 
 async function dbConnect() {
   if (cached.conn) {
+    console.log('Using cached database connection');
     return cached.conn;
   }
 
@@ -30,15 +32,25 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
-      return mongoose;
+    console.log('Creating new database connection promise');
+    cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongooseInstance) => {
+      console.log('MongoDB connected successfully');
+      return mongooseInstance;
+    }).catch(err => {
+      console.error('Initial MongoDB connection error:', err);
+      cached.promise = null; // Reset promise on error
+      throw err;
     });
   }
 
   try {
+    console.log('Awaiting database connection promise');
     cached.conn = await cached.promise;
   } catch (e) {
-    cached.promise = null;
+    // cached.promise should have been nulled by the catch block in the promise chain
+    // but defensive nulling here is okay.
+    cached.promise = null; 
+    console.error('Failed to establish MongoDB connection:', e);
     throw e;
   }
 
