@@ -1,10 +1,19 @@
 
-import 'dotenv/config'; // Explicitly load .env variables
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
+console.log('[dbConnect] Initializing database connection module.');
+console.log(`[dbConnect] Attempting to read MONGODB_URI from process.env.`);
+console.log(`[dbConnect] Value of process.env.MONGODB_URI: ${process.env.MONGODB_URI}`);
+console.log(`[dbConnect] Type of process.env.MONGODB_URI: ${typeof process.env.MONGODB_URI}`);
+
 if (!MONGODB_URI) {
+  console.error('[dbConnect] Critical Error: MONGODB_URI is not defined or is an empty string.');
+  console.error('[dbConnect] Please verify the following:');
+  console.error('[dbConnect] 1. A .env.local file exists in the root of your project.');
+  console.error('[dbConnect] 2. The .env.local file contains a line like: MONGODB_URI=your_connection_string');
+  console.error('[dbConnect] 3. You have restarted your Next.js development server after creating/modifying .env.local.');
   throw new Error(
     'MONGODB_URI not found. Please ensure this variable is defined in a .env.local file at the root of your project (e.g., MONGODB_URI=your_connection_string_here) and that you have restarted your development server.'
   );
@@ -23,7 +32,7 @@ if (!cached) {
 
 async function dbConnect() {
   if (cached.conn) {
-    console.log('Using cached database connection');
+    console.log('[dbConnect] Using cached database connection.');
     return cached.conn;
   }
 
@@ -32,25 +41,24 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    console.log('Creating new database connection promise');
+    console.log('[dbConnect] Creating new database connection promise.');
     cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongooseInstance) => {
-      console.log('MongoDB connected successfully');
+      console.log('[dbConnect] MongoDB connected successfully via new promise.');
       return mongooseInstance;
     }).catch(err => {
-      console.error('Initial MongoDB connection error:', err);
+      console.error('[dbConnect] Initial MongoDB connection error via new promise:', err);
       cached.promise = null; // Reset promise on error
       throw err;
     });
   }
 
   try {
-    console.log('Awaiting database connection promise');
+    console.log('[dbConnect] Awaiting database connection promise.');
     cached.conn = await cached.promise;
+    console.log('[dbConnect] Database connection promise resolved.');
   } catch (e) {
-    // cached.promise should have been nulled by the catch block in the promise chain
-    // but defensive nulling here is okay.
     cached.promise = null; 
-    console.error('Failed to establish MongoDB connection:', e);
+    console.error('[dbConnect] Failed to establish MongoDB connection while awaiting promise:', e);
     throw e;
   }
 
