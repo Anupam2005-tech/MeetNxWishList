@@ -50,13 +50,14 @@ export function EmailForm() {
   });
 
   useEffect(() => {
-    if (state?.message) {
+    // Ensure we only act if state.message has content (i.e., server has responded)
+    if (state?.message && state.message !== "") {
       if (state.type === "success") {
         toast({
           title: "Success!",
           description: state.message,
         });
-        form.reset();
+        form.reset(); // This should clear the input
       } else if (state.type === "error") {
         toast({
           title: "Error",
@@ -72,7 +73,7 @@ export function EmailForm() {
     const formData = new FormData();
     formData.append("email", data.email);
     // Call the server action dispatcher from useFormState
-    (formAction as (payload: FormData) => void)(formData);
+    formAction(formData); // Simplified call
   };
 
   return (
@@ -98,6 +99,9 @@ export function EmailForm() {
       )}
        {state?.type === 'error' && state.message.toLowerCase().includes('email') && !form.formState.errors.email && (
         <p id="email-error-server" className="text-destructive text-sm mt-1 sm:hidden">{state.message}</p>
+      )}
+       {state?.type === 'error' && !state.message.toLowerCase().includes('email') && state.message && !form.formState.errors.email && (
+         <p id="email-error-server-generic" className="text-destructive text-sm mt-1 sm:hidden">{state.message}</p>
       )}
     </form>
   );
