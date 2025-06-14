@@ -3,6 +3,9 @@
 
 import { z } from "zod";
 import { QuestionFormSchema } from "@/lib/schemas";
+import dbConnect from "@/lib/dbConnect";
+import EmailModel from "@/lib/models/EmailModel";
+import QuestionModel from "@/lib/models/QuestionModel";
 
 const emailSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -23,15 +26,28 @@ export async function submitEmail(prevState: any, formData: FormData) {
   const email = validatedFields.data.email;
 
   try {
-    // Simulate processing
-    console.log(`Email received (not saved): ${email}`);
-    // You could re-implement file saving here if needed, or other logic.
+    await dbConnect();
+    const existingEmail = await EmailModel.findOne({ email });
+    if (existingEmail) {
+      return {
+        type: "error",
+        message: "This email is already on the waitlist.",
+      };
+    }
+    await EmailModel.create({ email });
     return {
       type: "success",
-      message: "Thank you! Your email has been received for the MeetNX waitlist by Anupam.",
+      message: "Thank you! You've been added to the waitlist for MeetNX by Anupam.",
     };
   } catch (error: any) {
-    console.error("Failed to process email submission:", error);
+    console.error("Failed to save email to database:", error);
+    // Differentiate between duplicate key error and other errors
+    if (error.code === 11000) {
+         return {
+            type: "error",
+            message: "This email is already on the waitlist.",
+        };
+    }
     return {
       type: "error",
       message: "Something went wrong while processing your email. Please try again later.",
@@ -64,15 +80,14 @@ export async function submitQuestion(prevState: any, formData: FormData) {
   const { email, question } = validatedFields.data;
 
   try {
-    // Simulate processing
-    console.log(`Question received (not saved) from ${email}: ${question}`);
-    // You could re-implement file saving here if needed, or other logic.
+    await dbConnect();
+    await QuestionModel.create({ email, question });
     return {
       type: "success",
       message: "Thank you! Anupam has received your question and will get back to you.",
     };
   } catch (error) {
-    console.error("Failed to process question submission:", error);
+    console.error("Failed to save question to database:", error);
     return {
       type: "error",
       message: "Something went wrong while processing your question. Please try again later.",
