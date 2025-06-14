@@ -11,8 +11,8 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   console.error('[dbConnect] MONGODB_URI is not defined in environment variables.');
-  console.error('[dbConnect] Value of process.env.MONGODB_URI:', process.env.MONGODB_URI);
-  console.error('[dbConnect] Type of process.env.MONGODB_URI:', typeof process.env.MONGODB_URI);
+  console.error('[dbConnect] Value of process.env.MONGODB_URI:');
+  console.error('[dbConnect] Type of process.env.MONGODB_URI:');
   console.error('[dbConnect] Please ensure that:');
   console.error('[dbConnect] 1. You have a .env.local file in the root of your project.');
   console.error('[dbConnect] 2. The .env.local file contains a line like: MONGODB_URI=your_connection_string');
