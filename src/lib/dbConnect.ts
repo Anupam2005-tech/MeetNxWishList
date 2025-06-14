@@ -1,12 +1,12 @@
 
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI;
-
 console.log('[dbConnect] Initializing database connection module.');
 console.log(`[dbConnect] Attempting to read MONGODB_URI from process.env.`);
 console.log(`[dbConnect] Value of process.env.MONGODB_URI: ${process.env.MONGODB_URI}`);
 console.log(`[dbConnect] Type of process.env.MONGODB_URI: ${typeof process.env.MONGODB_URI}`);
+
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   console.error('[dbConnect] Critical Error: MONGODB_URI is not defined or is an empty string.');
@@ -57,7 +57,7 @@ async function dbConnect() {
     cached.conn = await cached.promise;
     console.log('[dbConnect] Database connection promise resolved.');
   } catch (e) {
-    cached.promise = null; 
+    cached.promise = null;
     console.error('[dbConnect] Failed to establish MongoDB connection while awaiting promise:', e);
     throw e;
   }
